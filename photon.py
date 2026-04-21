@@ -412,7 +412,7 @@ if not only_urls:
         elif not match.startswith("http") and not match.startswith("//"):
             scripts.add(main_url + "/" + match)
     # Step 3. Scan the JavaScript files for endpoints
-    print(f"{run} Crawling {len(scripts)} JavaScript files"
+    print(f"{run} Crawling {len(scripts)} JavaScript files")
     flash(jscanner, scripts, thread_count)
 
     for url in internal:
