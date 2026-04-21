@@ -43,7 +43,7 @@ print(
 try:
     from urllib.parse import urlparse  # For Python 3
 except ImportError:
-    print("%s Photon runs only on Python 3.2 and above." % info)
+    print(f"{info} Photon runs only on Python 3.2 and above.")
     quit()
 
 import core.config
@@ -160,7 +160,7 @@ if args.root:
         main_inp = main_inp[:-1]
 # If the user hasn't supplied an URL
 else:
-    print("\n" + parser.format_help().lower())
+    print(f"\n{parser.format_help().lower()}")
     quit()
 
 clone = args.clone
@@ -173,15 +173,15 @@ api = bool(args.api)  # Extract high entropy strings i.e. API keys and stuff
 
 proxies = []
 if args.proxies:
-    print("%s Testing proxies, can take a while..." % info)
+    print(f"{info} Testing proxies, can take a while...")
     for proxy in args.proxies:
         if is_good_proxy(proxy):
             proxies.append(proxy)
         else:
-            print("%s Proxy %s doesn't seem to work or timedout" % (bad, proxy["http"]))
-    print("%s Done" % info)
+            print(f"{bad} Proxy {proxy['http']} doesn't seem to work or timedout")
+    print(f"{info} Done")
     if not proxies:
-        print("%s no working proxies, quitting!" % bad)
+        print(f"{bad} no working proxies, quitting!")
         exit()
 else:
     proxies.append(None)
@@ -396,7 +396,7 @@ for level in range(crawl_level):
     elif len(internal) <= len(processed):
         if len(internal) > 2 + len(args.seeds):
             break
-    print("%s Level %i: %i URLs" % (run, level + 1, len(links)))
+    print(f"{run} Level {level + 1}: {len(links)} URLs")
     try:
         flash(extractor, links, thread_count)
     except KeyboardInterrupt:
@@ -412,7 +412,7 @@ if not only_urls:
         elif not match.startswith("http") and not match.startswith("//"):
             scripts.add(main_url + "/" + match)
     # Step 3. Scan the JavaScript files for endpoints
-    print("%s Crawling %i JavaScript files" % (run, len(scripts)))
+    print(f"{run} Crawling {len(scripts)} JavaScript files"
     flash(jscanner, scripts, thread_count)
 
     for url in internal:
@@ -480,15 +480,15 @@ dataset_names = [
 
 writer(datasets, dataset_names, output_dir)
 # Printing out results
-print(("%s-%s" % (red, end)) * 50)
+print(f"{'{run}'}{'{red}'}{'{end}'}" * 50)
 for dataset, dataset_name in zip(datasets, dataset_names):
     if dataset:
-        print("%s %s: %s" % (good, dataset_name.capitalize(), len(dataset)))
-print(("%s-%s" % (red, end)) * 50)
+        print(f"{good} {dataset_name.capitalize()}: {len(dataset)}")
+print(f"{'{run}'}{'{red}'}{'{end}'}" * 50)
 
-print("%s Total requests made: %i" % (info, len(processed)))
-print("%s Total time taken: %i minutes %i seconds" % (info, minutes, seconds))
-print("%s Requests per second: %i" % (info, int(len(processed) / diff)))
+print(f"{info} Total requests made: {len(processed)}")
+print(f"{info} Total time taken: {minutes} minutes {seconds} seconds")
+print(f"{info} Requests per second: {int(len(processed) / diff)}")
 
 datasets = {
     "files": list(files),
@@ -509,12 +509,12 @@ if args.dns:
     from plugins.find_subdomains import find_subdomains
 
     subdomains = find_subdomains(domain)
-    print("%s %i subdomains found" % (info, len(subdomains)))
+    print(f"{info} {len(subdomains)} subdomains found")
     writer([subdomains], ["subdomains"], output_dir)
     datasets["subdomains"] = subdomains
     from plugins.dnsdumpster import dnsdumpster
 
-    print("%s Generating DNS map" % run)
+    print(f"{run} Generating DNS map")
     dnsdumpster(domain, output_dir)
 
 if args.export:
@@ -523,7 +523,7 @@ if args.export:
     # exporter(directory, format, datasets)
     exporter(output_dir, args.export, datasets)
 
-print("%s Results saved in %s%s%s directory" % (good, green, output_dir, end))
+print(f"{good} Results saved in {green}{output_dir}{end} directory")
 
 if args.std:
     for string in datasets[args.std]:
