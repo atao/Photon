@@ -118,7 +118,7 @@ def xml_parser(response):
 def verb(kind, string):
     """Enable verbose output."""
     if VERBOSE:
-        print('%s %s: %s' % (info, kind, string))
+        print(f"{info} {kind}: {string}")
 
 
 def extract_headers(headers):
@@ -155,7 +155,7 @@ def is_proxy_list(v, proxies):
                     proxies.append({"http": line,
                                     "https": line})
                 else:
-                    print("%s ignored" % line)
+                    print(f"{bad} {line} ignored")
         if proxies:
             return True
     return False

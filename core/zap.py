@@ -11,12 +11,12 @@ def zap(input_url, archive, domain, host, internal, robots, proxies, verf):
     response = ""
     """Extract links from robots.txt and sitemap.xml."""
     if archive:
-        print("%s Fetching URLs from archive.org" % run)
+        print(f"{run} Fetching URLs from archive.org")
         if False:
             archived_urls = time_machine(domain, "domain")
         else:
             archived_urls = time_machine(host, "host")
-        print("%s Retrieved %i URLs from archive.org" % (good, len(archived_urls) - 1))
+        print(f"{good} Retrieved {len(archived_urls) - 1} URLs from archive.org")
         for url in archived_urls:
             verb("Internal page", url)
             internal.add(url)
@@ -46,7 +46,7 @@ def zap(input_url, archive, domain, host, internal, robots, proxies, verf):
                     internal.add(url)
                     # Add the URL to robots list
                     robots.add(url)
-            print("%s URLs retrieved from robots.txt: %s" % (good, len(robots)))
+            print(f"{good} URLs retrieved from robots.txt: {len(robots)}")
     # Makes request to sitemap.xml
     try:
         response = requests.get(
@@ -60,7 +60,7 @@ def zap(input_url, archive, domain, host, internal, robots, proxies, verf):
     if "<body" not in response:
         matches = xml_parser(response)
         if matches:  # if there are any matches
-            print("%s URLs retrieved from sitemap.xml: %s" % (good, len(matches)))
+            print(f"{good} URLs retrieved from sitemap.xml: {len(matches)}")
             for match in matches:
                 verb("Internal page", match)
                 # Cleaning up the URL and adding it to the internal list for

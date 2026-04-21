@@ -216,7 +216,7 @@ if headers:
     try:
         prompt = prompt()
     except FileNotFoundError as e:
-        print("Could not load headers prompt: {}".format(e))
+        print(f"{bad} Could not load headers prompt: {e}")
         quit()
     headers = extract_headers(prompt)
 
@@ -505,7 +505,7 @@ datasets = {
 }
 
 if args.dns:
-    print("%s Enumerating subdomains" % run)
+    print(f"{run} Enumerating subdomains")
     from plugins.find_subdomains import find_subdomains
 
     subdomains = find_subdomains(domain)
