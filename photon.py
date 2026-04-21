@@ -480,11 +480,11 @@ dataset_names = [
 
 writer(datasets, dataset_names, output_dir)
 # Printing out results
-print(f"{'{run}'}{'{red}'}{'{end}'}" * 50)
+print(f"{red}-{end}" * 50)
 for dataset, dataset_name in zip(datasets, dataset_names):
     if dataset:
         print(f"{good} {dataset_name.capitalize()}: {len(dataset)}")
-print(f"{'{run}'}{'{red}'}{'{end}'}" * 50)
+print(f"{red}-{end}" * 50)
 
 print(f"{info} Total requests made: {len(processed)}")
 print(f"{info} Total time taken: {minutes} minutes {seconds} seconds")
