@@ -47,7 +47,7 @@ except ImportError:
     quit()
 
 import core.config
-from core.config import INTELS
+from core.config import OUTPUT_PARENT, INTELS
 from core.flash import flash
 from core.mirror import mirror
 from core.prompt import prompt
@@ -179,7 +179,7 @@ if args.proxies:
             proxies.append(proxy)
         else:
             print(f"{bad} Proxy {proxy['http']} doesn't seem to work or timedout")
-    print(f"{info} Done")
+    print(f"{good} Done")
     if not proxies:
         print(f"{bad} no working proxies, quitting!")
         exit()
@@ -449,7 +449,8 @@ minutes, seconds, time_per_request = timer(diff, processed)
 
 # Step 4. Save the results
 if not os.path.exists(output_dir):  # if the directory doesn't exist
-    os.mkdir(output_dir)  # create a new directory
+    full_path = os.path.join(OUTPUT_PARENT, output_dir)
+    os.makedirs(full_path, exist_ok=True)
 
 datasets = [
     files,
@@ -486,9 +487,9 @@ for dataset, dataset_name in zip(datasets, dataset_names):
         print(f"{good} {dataset_name.capitalize()}: {len(dataset)}")
 print(f"{red}-{end}" * 50)
 
-print(f"{info} Total requests made: {len(processed)}")
-print(f"{info} Total time taken: {minutes} minutes {seconds} seconds")
-print(f"{info} Requests per second: {int(len(processed) / diff)}")
+print(f"{good} Total requests made: {len(processed)}")
+print(f"{good} Total time taken: {minutes} minutes {seconds} seconds")
+print(f"{good} Requests per second: {int(len(processed) / diff)}")
 
 datasets = {
     "files": list(files),

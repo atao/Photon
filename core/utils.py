@@ -7,7 +7,7 @@ import argparse
 import tld
 
 from core.colors import info
-from core.config import VERBOSE, BAD_TYPES
+from core.config import VERBOSE, BAD_TYPES, OUTPUT_PARENT
 
 from urllib.parse import urlparse
 
@@ -77,6 +77,7 @@ def remove_regex(urls, regex):
 
 def writer(datasets, dataset_names, output_dir):
     """Write the results."""
+    output_dir = os.path.join(OUTPUT_PARENT, output_dir)
     for dataset, dataset_name in zip(datasets, dataset_names):
         if dataset:
             filepath = output_dir + '/' + dataset_name + '.txt'

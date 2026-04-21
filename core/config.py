@@ -3,25 +3,27 @@
 VERBOSE = False
 
 INTELS = [
-    'facebook.com',
-    'github.com',
-    'instagram.com',
-    'youtube.com',
+    "facebook.com",
+    "github.com",
+    "instagram.com",
+    "youtube.com",
 ]
 
 BAD_TYPES = (
-    'bmp',
-    'css',
-    'csv',
-    'docx',
-    'ico',
-    'jpeg',
-    'jpg',
-    'js',
-    'json',
-    'pdf',
-    'png',
-    'svg',
-    'xls',
-    'xml',
+    "bmp",
+    "css",
+    "csv",
+    "docx",
+    "ico",
+    "jpeg",
+    "jpg",
+    "js",
+    "json",
+    "pdf",
+    "png",
+    "svg",
+    "xls",
+    "xml",
 )
+
+OUTPUT_PARENT = "data"
